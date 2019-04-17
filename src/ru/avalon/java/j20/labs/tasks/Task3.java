@@ -1,9 +1,14 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.io.BufferedReader;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -25,19 +30,19 @@ public class Task3 implements Task {
         write(output, lines);
 
         /*
-         * TODO(Студент): Выполнить задание №3
+         * Выполнено задание №3
          *
-         * 1. Реализовать метод read.
+         * 1. Реализован метод read.
          *
-         *    При чтении файла следует пользоваться типами данных:
+         *    При чтении файла использованы типы данных:
          *    FileReader и BufferedReader.
          *
-         * 2. Реализовать метод write.
+         * 2. Реализован метод write.
          *
-         *    При реализации метода следует пользоваться типами данных:
+         *    При реализации метода использован тип данных:
          *    PrintWriter.
          *
-         * 3. С использованием отладчика проверить корректность работы программы.
+         * 3. С использованием отладчика проверена корректность работы программы.
          */
     }
 
@@ -52,7 +57,18 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private Collection<String> read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        try(Reader reader = new FileReader(file);
+            BufferedReader input = new BufferedReader(reader)){
+            Collection<String> result = new ArrayList<>();
+            String line;
+            while ((line = input.readLine()) != null ){
+                line = line.trim();
+                if (!line.isEmpty()) {
+                    result.add(line);
+                }
+            }
+            return result;
+        }
     }
 
     /**
@@ -66,6 +82,10 @@ public class Task3 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, Collection<String> collection) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        try (PrintWriter writer = new PrintWriter(file)) {
+            for(String line : collection) {
+                writer.println(line);
+            }
+        }
     }
 }

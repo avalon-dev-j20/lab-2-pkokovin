@@ -3,7 +3,11 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 
 /**
  * Задание №2
@@ -24,22 +28,22 @@ public class Task2 implements Task {
         write(output, text);
 
         /*
-         * TODO(Студент): Выполнить задание №2
+         * Выполнено задание №2
          *
-         * 1. Реализовать метод read.
+         * 1. Реализован метод read.
          *
-         *    При чтении файла следует пользоваться типами данных:
+         *    При чтении файла использованы типы данных:
          *    Reader, FileReader.
          *
-         *    Для сохранения прочитанных данных следует пользоваться
+         *    Для сохранения прочитанных данных использован
          *    классом StringBuilder.
          *
-         * 2. Реализовать метод write.
+         * 2. Реализовн метод write.
          *
-         *    При реализации метода следует пользоваться типами данных:
+         *    При реализации метода использованы типы данных:
          *    Writer и FileWriter.
          *
-         * 3. С использованием отладчика проверить корректность работы программы.
+         * 3. С использованием отладчика проверена корректность работы программы.
          */
     }
 
@@ -54,7 +58,15 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+         try (Reader reader = new FileReader(file)){
+            StringBuilder builder = new StringBuilder();
+            char[] buffer = new char[5];
+            int len;
+            while ((len = reader.read(buffer)) > 0) {
+                builder.append(buffer, 0, len);
+            }
+            return builder.toString();      
+        }
     }
 
     /**
@@ -66,6 +78,8 @@ public class Task2 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+         try (Writer writer = new FileWriter(file)) {
+            writer.write(text);
+        }
     }
 }
