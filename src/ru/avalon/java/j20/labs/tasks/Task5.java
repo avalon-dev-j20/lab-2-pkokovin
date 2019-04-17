@@ -3,6 +3,7 @@ package ru.avalon.java.j20.labs.tasks;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -18,18 +19,23 @@ public class Task5 implements Task {
      */
     @Override
     public void run() throws IOException {
+        
+        Locale locale = new Locale("en");
+        String path = "resources.strings.titles";
+        ResourceBundle bundleDefault = read(path);
+        ResourceBundle bundleEn = read(path, locale);
         /*
-         * TODO(Студент): Выполнить задание №5
+         * Выполнено задание №5
          *
-         * 1. Реализовать метод read.
+         * 1. Реализован метод read.
          *
-         * 2. Прочитать ресурсы с использованием локализации по умолчанию.
+         * 2. Прочитаны ресурсы с использованием локализации по умолчанию (ru).
          *
-         * 3. Прочитать ресурсы с использованием локализации, отличной от той,
-         *    которая задана по умолчанию.
+         * 3. Прочитаны ресурсы с использованием локализации, отличной от той,
+         *    которая задана по умолчанию (en).
          *
-         * 4. С использованием отладчика сравнить полученные ресурсы и
-         *    проверить корректность работы программы.
+         * 4. С использованием отладчика сравнены полученные ресурсы и
+         *    проверена корректность работы программы.
          */
     }
 
@@ -41,7 +47,8 @@ public class Task5 implements Task {
      * @return новый экземпляр типа {@link ResourceBundle}
      */
     private ResourceBundle read(String path) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        ResourceBundle bundle = ResourceBundle.getBundle(path);
+        return bundle;
     }
 
     /**
@@ -51,6 +58,8 @@ public class Task5 implements Task {
      * @return новый экземпляр типа {@link ResourceBundle}
      */
     private ResourceBundle read(String path, Locale locale) {
-        throw new UnsupportedOperationException("Not implement yet!");
+        
+        ResourceBundle bundle = ResourceBundle.getBundle(path, locale);
+        return bundle;
     }
 }

@@ -1,9 +1,14 @@
 package ru.avalon.java.j20.labs.tasks;
 
+import java.io.ByteArrayOutputStream;
 import ru.avalon.java.j20.labs.Task;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Задание №1
@@ -24,22 +29,22 @@ public class Task1 implements Task {
         write(output, text);
 
         /*
-         * TODO(Студент): Выполнить задание №1
+         * Выполнено задание №1
          *
-         * 1. Реализовать метод read.
+         * 1. Реализован метод read.
          *
-         *    При чтении файла следует пользоваться типами данных:
+         *    При чтении файла были использованы типы данных:
          *    InputStream и FileInputStream.
          *
-         *    Для сохранениня прочитанных данных следует пользоваться
-         *    классом ByteArrayOutputStream.
+         *    Для сохранениня прочитанных данных использован
+         *    класс ByteArrayOutputStream.
          *
-         * 2. Реализовать метод write.
+         * 2. Реализован метод write.
          *
-         *    При реализации метода следует пользоваться типами данных:
+         *    При реализации метода были использованы типы данных:
          *    OutputStream и FileOutputStream.
          *
-         * 3. С использованием отладчика проверить корректность работы программы.
+         * 3. С использованием отладчика проверена корректность работы программы.
          */
     }
 
@@ -54,7 +59,15 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private String read(File file) throws IOException {
-        throw new UnsupportedOperationException("Not implement yet!");
+        try (InputStream stream = new FileInputStream(file);
+                ByteArrayOutputStream memory = new ByteArrayOutputStream()) {
+            byte[] buffer = new byte[5];
+            int len;
+            while ((len = stream.read(buffer)) > 0) {
+                memory.write(buffer, 0, len);
+            }
+            return memory.toString();
+        }
     }
 
     /**
@@ -66,6 +79,8 @@ public class Task1 implements Task {
      * @throws IOException в случае ошибок ввода-вывода.
      */
     private void write(File file, String text) throws IOException {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        try (OutputStream stream = new FileOutputStream(file)) {
+            stream.write(text.getBytes());
+        }
     }
 }
